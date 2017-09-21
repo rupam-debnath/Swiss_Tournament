@@ -1,0 +1,36 @@
+<div class="container">
+
+    <div class="col-sm-6 col-sm-offset-3">
+        {{#if message}}
+        <p style="color: red"> {{message}}</p>
+         {{/if}}
+        <h1><span class="fa fa-sign-in"></span> Signup</h1>
+
+        <!-- show any messages that come back with authentication -->
+
+
+        <!-- LOGIN FORM -->
+        <form action="/register" method="post">
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-lg" id="letsRegister">Signup</button>
+        </form>
+
+        <hr>
+
+        <p>Already have an account? <a href="/login">Login</a></p>
+        <p>Or go <a href="/">home</a>.</p>
+
+    </div>
+
+</div>
+<script src="/js/createTour.js"></script>
+<script src="/js/notify.min.js"></script>

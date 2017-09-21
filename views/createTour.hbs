@@ -1,0 +1,42 @@
+  <div class="container">
+    <div class="row" align="left">
+      <h1>{{email}}</h1>
+      <strong>Tournament Page</strong>
+      </div>
+       <div class="row" >
+      <div class="col-sm-9 col-md-9">
+        <h2>Select or Add Tournament</h2>
+      </div>
+      <div class=" col-sm-3 col-md-3">
+      <a href="/logout"><button type="button" class="btn btn-warning btn-lg" id="Logout">Logout</button></a>
+    </div>
+      <div class="col-sm-8 col-md-8">
+        <input type='text' class="form-control" id="t_name" required="required">
+      </div>
+      <div class="col-sm-4 col-md-4">
+        <button class="btn btn-default" id="addToTable"> Add Tournament </button>
+      </div>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Tournament Name</th>
+          <th>Status</th>
+          <th>Winner</th>
+        </tr>
+      </thead>
+      <tbody id="TournamentTable">
+        {{#each result}}
+        <tr>
+          <th><a class="tour" href="/Tournament/{{t_id}}/{{t_name}}">{{t_name}}</th></a>
+          <td>{{status}}</td>
+          <td>{{winner}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <script src="/js/createTour.js"></script>
+  <script src="/js/notify.min.js"></script>
+
+

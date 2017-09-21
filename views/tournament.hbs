@@ -1,0 +1,198 @@
+<script src="/js/createTour.js"></script>
+<script src="/js/notify.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <style>
+.roundHead {
+    word-spacing: 300px;
+}
+</style> -->
+<div class="container">
+ <div class="row">
+   <div class=" col-sm-4 col-md-4">
+     <h3>Tournament Name: {{t_name}}</h3>
+   </div>
+   <div class=" col-sm-3 col-md-3 tour_status">
+     <h3>Status: {{t_status}}</h3>
+   </div>
+   <div class=" col-sm-3 col-md-3">
+    <button type="button" class="btn btn-warning btn-lg" id="startTour"
+    data-toggle="modal" data-target="#myModal">Start Tournament</button>
+  </div>
+  <div class=" col-sm-2 col-md-2">
+    <a href="/logout"><button type="button" class="btn btn-warning btn-lg" id="Logout">Logout</button></a>
+    <!-- <a href="/createTour" id="back">Back to Create Tournament page</a> -->
+  </div>
+</div>
+<hr>
+<div class=" col-sm-4 col-md-4">
+  <input type="text" placeholder="Enter Player Name" id="p_name" required="required">
+  <input type="hidden" name="t_id" id="t_id" value={{t_id}}>
+  <button id="addPlayer" class="btn btn-warning btn-lg">Add Players</button>
+  <div class="viewtour">
+    <div>
+      <!-- Add player table -->
+      <table class="table table-striped" id="playerId">
+        <thead>
+          <tr>
+            <th>Player Name</th>
+          </tr>
+        </thead>
+        <tbody id="playerTable">
+          {{#each result}}
+          <tr>
+            <th>{{p_name}}</th>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class=" col-sm-2 col-md-2">
+</div>
+<!-- Current Standings table -->
+<div class=" col-sm-6 col-md-6">
+  <h3>Current Standings</h3>
+  <div>
+    <table class="table table-striped" id="currentStandings">
+      <thead>
+        <tr>
+          <th>Player Name</th>
+          <th>Wins</th>
+          <th>Loses</th>
+        </tr>
+      </thead>
+      <tbody id="playerStatus"  class="table table-striped">
+        {{#each cur_result}}
+        <tr>
+          <th>{{p_name}}{{Name}}</th>
+          <td>{{wins}}</td>
+          <td>{{loses}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+<hr>
+<!-- Round execution table -->
+<div class="row">
+<div class=" col-sm-6 col-md-6">
+  <h2 align="left">Round </h2>
+   </div>
+  <div class=" col-sm-6 col-md-6" id="finalWinner">
+  <h2 style="color: green" ></h2>
+  <!-- <h2>Round <span style="color:green; float: right;">Winner: {{winner}}</span></h2> -->
+
+  </div>
+</div>
+  <div>
+    <table class="table table-striped" class=".standing">
+      <thead>
+        <tr>
+          <th>Round #</th>
+          <th>Status</th>
+          <th>Execute</th>
+          <th>Standings</th>
+        </tr>
+      </thead>
+      <tbody id="roundTable" >
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal 1 for message on player count-->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog" id="sure">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Message</h4>
+      </div>
+      <div class="modal-body" id="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Modal 2 for execution of rounds-->
+<div id="executeRound" class="modal fade" role="dialog">
+  <div class="modal-dialog" id="sure1">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Fixture</h4>
+      </div>
+      <div class="modal-body1">
+
+        <table class="table table-striped">
+          <thead>
+            <tr class="rowExecute">
+              <th>Player 1</th>
+              <th>Player 2</th>
+              <th>Winner</th>
+            </tr>
+          </thead>
+          <tbody class="modal-table-body table-striped" id="er_body">
+
+          </tbody>
+        </table>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" id="submitWinner" data-dismiss="modal">Submit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Modal 3 for round standings-->
+<div id="roundStandings" class="modal fade" role="dialog">
+  <div class="modal-dialog" id="sure2">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Round Result</h4>
+      </div>
+      <div class="modal-body2">
+
+        <table class="table table-striped">
+          <thead>
+            <tr class="roundRes">
+              <th>Player 1</th>
+              <th>Player 2</th>
+              <th>Winner</th>
+            </tr>
+          </thead>
+          <tbody class="table-striped" id="rs_body">
+
+          </tbody>
+        </table>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
